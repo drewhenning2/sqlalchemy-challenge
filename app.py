@@ -158,18 +158,18 @@ def start_end_date(start_date, end_date):
 
     # query list of min, max, avg for a start date
     results = session.query(func.min(Measurement.tobs),
-        func.max(Measurement.tobs),
-        func.avg(Measurement.tobs)).\
+        func.avg(Measurement.tobs),
+        func.max(Measurement.tobs)).\
         filter(Measurement.date >= start_date).\
         filter(Measurement.date <= end_date).all()
 
 # convert query results to a dictionary    
     start_end_tobs = []
-    for min, max, avg in results:
+    for min, avg, max in results:
         start_end_dict = {}
         start_end_dict['min'] = min
-        start_end_dict['max'] = max
         start_end_dict['avg'] = avg
+        start_end_dict['max'] = max
                
         start_end_tobs.append(start_end_dict)
 
